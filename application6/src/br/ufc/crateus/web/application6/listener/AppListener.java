@@ -12,13 +12,14 @@ public class AppListener implements ServletContextListener {
 	public AppListener() {
 	}
 
-	public void contextInitialized(ServletContextEvent arg0) {
-		DatabaseManager.init();
-
-	}
-
+	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		DatabaseManager.close();
+	}
+
+	@Override
+	public void contextInitialized(ServletContextEvent arg0) {
+		DatabaseManager.init();
 	}
 
 }

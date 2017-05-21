@@ -6,18 +6,26 @@ import javax.persistence.Id;
 
 @Entity
 public class Disciplina {
- 
+
 	@Id
 	@GeneratedValue
 	private int id;
 	private String nome;
 
 	public Disciplina() {
-	
+
 	}
 
 	public Disciplina(String nome) {
 		setNome(nome);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {

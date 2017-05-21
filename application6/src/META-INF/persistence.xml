@@ -3,14 +3,14 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
-	<persistence-unit name="school">
+	<persistence-unit name="sigaa">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<properties>
 			<property name="hibernate.archive.autodetection" value="class" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:h2:~/school/db" />
+			<property name="hibernate.connection.url" value="jdbc:h2:~/sigaa/db" />
 			<property name="hibernate.connection.user" value="sa" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
@@ -18,4 +18,6 @@
 		</properties>
 
 	</persistence-unit>
+
+
 </persistence>

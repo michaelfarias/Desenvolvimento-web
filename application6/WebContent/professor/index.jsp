@@ -8,13 +8,9 @@
 <title>Login</title>
 </head>
 <body>
-
-	<c:url value="/login" var="login"></c:url>
-	<form action="${login}" method="post" style="margin: 50px">
-		<label style="color: red">${errorMessage}</label></br> Login: <input
-			type="text" name="login"></br> Senha:<input type="password"
-			name="senha"></br> <input type="submit" name="entrar">
-	</form>
+	<a href="cadastrar-disciplina.html">cadastrar disciplina</a>
 	<br>
-
-	<c:import url="tabelaDisciplina.jsp"></c:import>
+	<a href="/application6/logout">sair</a>
+	
+	<br>
+	<c:import url="/tabelaDisciplina.jsp"></c:import>

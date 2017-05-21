@@ -8,7 +8,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-abstract class Usuario {
+public abstract class Usuario {
 
 	@Id
 	@GeneratedValue
@@ -17,12 +17,12 @@ abstract class Usuario {
 	private String senha;
 
 	public Usuario() {
+
 	}
 
 	public Usuario(String nome, String senha) {
-
-		this.nome = nome;
-		this.senha = senha;
+		setNome(nome);
+		setSenha(senha);
 	}
 
 	public int getId() {
@@ -47,6 +47,11 @@ abstract class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", senha=" + senha + "]";
 	}
 
 }

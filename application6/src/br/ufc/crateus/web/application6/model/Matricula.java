@@ -3,25 +3,33 @@ package br.ufc.crateus.web.application6.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Matricula {
 
-	@Id 
+	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToOne
-	Aluno aluno;
-	@ManyToOne
-	Disciplina disciplina;
+	@OneToOne
+	private Aluno aluno;
+	@OneToOne
+	private Disciplina disciplina;
 
 	public Matricula() {
 	}
 
 	public Matricula(Aluno aluno, Disciplina disciplina) {
-		this.aluno = aluno;
-		this.disciplina = disciplina;
+		setAluno(aluno);
+		setDisciplina(disciplina);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Aluno getAluno() {

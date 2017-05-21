@@ -4,12 +4,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class DatabaseManager {
-
 	private static EntityManagerFactory emf;
 
 	public static void init() {
+		emf = Persistence.createEntityManagerFactory("sigaa");
 
-		emf = Persistence.createEntityManagerFactory("school");
 	}
 
 	public static EntityManagerFactory getEmf() {
@@ -19,4 +18,5 @@ public class DatabaseManager {
 	public static void close() {
 		emf.close();
 	}
+
 }
