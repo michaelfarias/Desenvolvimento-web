@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Sem Titulo</title>
+</head>
+<body>
+
+	<h:messages></h:messages>
+	<h:link value="Voltar" outcome="/index"></h:link>
+	<br />
+	<br />
+	<h:form>
+				Professor: <h:selectOneMenu value="#{professorBean.professor}">
+			<f:converter converterId="professorConverter" />
+			<f:selectItems value="#{professorBean.professores}" var="v"
+				itemLabel="#{v.nome}" itemValue="#{v}">
+			</f:selectItems>
+		</h:selectOneMenu>
+		<br />
+		<br />
+		Disciplinas:<br />
+		<h:selectManyMenu value="#{professorBean.professor.disciplinas}"
+			style="width: 100px; height: 100px;">
+			<f:converter converterId="disciplinaConverter" />
+			<f:selectItems value="#{disciplinaBean.disciplinas}" var="v"
+				itemLabel="#{v.nome}" itemValue="#{v}">
+			</f:selectItems>
+		</h:selectManyMenu>
+
+		<br />
+		<h:commandButton action="#{professorBean.addDisciplina()}"
+			value="Salvar"></h:commandButton>
+	</h:form>
+</body>
+</html>
