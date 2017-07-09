@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Administração</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+
+		<ui:composition template="/template/layout.xhtml">
+			<ui:define name="center">
+				<h:form>
+
+					<p:growl id="msg" autoUpdate="true" showDetail="true" />
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Disciplina e período:"></p:outputLabel>
+						<p:selectOneMenu value="#{disciplinaBean.disciplina}">
+							<f:converter converterId="disciplinaConverter"></f:converter>
+							<f:selectItems value="#{disciplinaBean.disciplinas}" var="d"
+								itemLabel="#{d.nome} - #{d.periodo}"></f:selectItems>
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Aluno(s):" for="th" />
+						<p:autoComplete id="th" multiple="true"
+							value="#{disciplinaBean.disciplina.alunos}"
+							completeMethod="#{alunoBean.alunos}" var="aluno"
+							itemLabel="#{aluno.nome}" itemValue="#{aluno}"
+							converter="alunoConverter" forceSelection="true">
+						</p:autoComplete>
+						<br />
+						<p:commandButton actionListener="#{disciplinaBean.update()}"
+							ajax="false" update="msg" value="Matricular" />
+					</h:panelGrid>
+				</h:form>
+				<br />
+				<br />
+				<p:dataTable value="#{disciplinaBean.disciplinas}" var="d" rows="7"
+					paginator="true">
+					<p:column headerText="Nome">
+						<h:outputText value="#{d.nome}" />
+					</p:column>
+					<p:column headerText="Carga horária">
+						<h:outputText value="#{d.cargaHoraria}" />
+					</p:column>
+					<p:column headerText="Período">
+						<h:outputText value="#{d.periodo}" />
+					</p:column>
+					<p:column headerText="Professor">
+						<h:outputText value="#{d.professor.nome}" />
+					</p:column>
+					<p:column headerText="Alunos">
+						<h:outputText value="#{d.alunos}" />
+					</p:column>
+
+				</p:dataTable>
+			</ui:define>
+		</ui:composition>
+
+	</p:layout>
+</h:body>
+</html>

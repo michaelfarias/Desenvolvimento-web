@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Administração</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="100">
+			Admin - <h:outputText value="#{loginBean.usuario}" />
+
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<br />
+				<p:commandButton action="#{loginBean.logout()}" value="Sair"
+					ajax="false" />
+			</h:panelGrid>
+		</h:form>
+		
+		</p:layoutUnit>
+
+
+
+		<p:layoutUnit position="center">
+
+			<p:panel>
+				<h:form>
+					<p:growl id="msg" autoUpdate="true" showDetail="true" />
+					<h:panelGrid columns="2">
+
+						<p:inputNumber type="hidden" value="#{alunoBean.aluno.id}">
+						</p:inputNumber>
+						<br />
+						<p:outputLabel value="Nome:"></p:outputLabel>
+						<p:inputText value="#{alunoBean.aluno.nome}"></p:inputText>
+						<p:outputLabel value="Matricula:"></p:outputLabel>
+						<p:inputText value="#{alunoBean.aluno.matricula}"></p:inputText>
+						<p:outputLabel value="Email:"></p:outputLabel>
+						<p:inputText value="#{alunoBean.aluno.email}">
+							<f:validator validatorId="emailValidator"></f:validator>
+						</p:inputText>
+						<p:commandButton actionListener="#{alunoBean.salvar()}"
+							ajax="false" update="msg" value="Salvar" />
+					</h:panelGrid>
+					<br />
+					<p:dataTable value="#{alunoBean.alunos}" var="a" rows="7"
+						paginator="true">
+						<p:column headerText="Nome">
+							<h:outputText value="#{a.nome}" />
+						</p:column>
+						<p:column headerText="Matricula">
+							<h:outputText value="#{a.matricula}" />
+						</p:column>
+						<p:column headerText="Email">
+							<h:outputText value="#{a.email}" />
+
+						</p:column>
+						<p:column headerText="Ações">
+							<p:commandButton actionListener="#{alunoBean.carregar(a)}"
+								value="Editar" ajax="false" />
+							<p:commandButton actionListener="#{alunoBean.remover(a)}"
+								value="Remover" ajax="false" />
+
+						</p:column>
+						<p:column headerText="Responsavel">
+							<h:outputText value="#{a.usuario.login}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200">
+			<h2>Menu</h2>
+			<br />
+			<p:link href="index.jsf">Alunos</p:link>
+			<br />
+			<br />
+			<p:link href="professores.jsf">Professores</p:link>
+			<br />
+			<br />
+
+			<p:link href="disciplinas.jsf">Disciplinas</p:link>
+			<br />
+			<br />
+			
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
