@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Site</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" header="">
+			<center>
+				<h1>Matriculas de aluno</h1>
+			</center>
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200" header="Menu"
+			resizable="true" closable="true" collapsible="true">
+			<p:link href="index.jsf">Inicio</p:link>
+			<br />
+			<br />
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<p:panel header="Matricular aluno">
+				<h:form>
+					<p:growl id="msg" autoUpdate="true" showDetail="true" />
+					<h:panelGrid columns="2">
+						<p:inputNumber value="#{matriculaBean.matricula.id}" type="hidden">
+						</p:inputNumber>
+						<br />
+						<p:outputLabel value="Aluno:"></p:outputLabel>
+						<p:selectOneMenu value="#{matriculaBean.matricula.aluno}">
+							<f:converter converterId="alunoConverter"></f:converter>
+							<f:selectItems value="#{alunoBean.alunos}" var="a"
+								itemLabel="#{a.nome}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:outputLabel value="Disciplina e período:"></p:outputLabel>
+						<p:selectOneMenu value="#{matriculaBean.matricula.disciplina}">
+							<f:converter converterId="disciplinaConverter"></f:converter>
+							<f:selectItems value="#{disciplinaBean.disciplinas}" var="d"
+								itemLabel="#{d.nome} - #{d.periodo}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:commandButton actionListener="#{matriculaBean.salvar()}"
+							ajax="false" update="msg" value="Salvar" />
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+			<p:panel>
+
+				<p:dataTable value="#{matriculaBean.matriculas}" var="m" rows="7"
+					paginator="true">
+					<p:column headerText="Nome do aluno">
+						<h:outputText value="#{m.aluno.nome}" />
+					</p:column>
+					<p:column headerText="Disciplina">
+						<h:outputText value="#{m.disciplina.nome}" />
+					</p:column>
+					<p:column headerText="Período">
+						<h:outputText value="#{m.disciplina.periodo}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Site</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" header="">
+			<center>
+				<h1>Disciplinas</h1>
+			</center>
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200" header="Menu"
+			resizable="true" closable="true" collapsible="true">
+			<p:link href="listarDisciplinas.jsf">Listar disciplinas</p:link>
+			<br />
+			<br />
+			<p:link href="index.jsf">Inicio</p:link>
+			<br />
+			<br />
+
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<p:panel header="Nova disciplina">
+				<h:form>
+					<p:growl id="msg" autoUpdate="true" showDetail="true" />
+					<h:panelGrid columns="2">
+
+						<p:inputNumber type="hidden"
+							value="#{disciplinaBean.disciplina.id}">
+						</p:inputNumber>
+						<br />
+						<p:outputLabel value="Nome:"></p:outputLabel>
+						<p:inputText value="#{disciplinaBean.disciplina.nome}">
+						</p:inputText>
+						<p:outputLabel value="Carga horária:"></p:outputLabel>
+						<p:inputNumber value="#{disciplinaBean.disciplina.cargaHoraria}"></p:inputNumber>
+						<p:outputLabel value="Periodo:">
+						</p:outputLabel>
+						<p:inputText value="#{disciplinaBean.disciplina.periodo}">
+							<f:validator validatorId="periodoValidator"></f:validator>
+						</p:inputText>
+						<p:outputLabel value="Professor:"></p:outputLabel>
+
+						<p:selectOneMenu value="#{disciplinaBean.disciplina.professor}">
+							<f:converter converterId="professorConverter"></f:converter>
+							<f:selectItems value="#{professorBean.professores}" var="p"
+								itemLabel="#{p.nome}"></f:selectItems>
+						</p:selectOneMenu>
+
+						<p:commandButton actionListener="#{disciplinaBean.salvar()}"
+							ajax="false" update="msg" value="Salvar" />
+					</h:panelGrid>
+
+				</h:form>
+
+			</p:panel>
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+</html>

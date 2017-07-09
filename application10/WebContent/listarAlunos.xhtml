@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Site</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" header="">
+			<center>
+				<h1>Alunos</h1>
+			</center>
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200" header="Menu"
+			resizable="true" closable="true" collapsible="true">
+			<p:link href="cadastrarAluno.jsf">Cadastrar Aluno</p:link>
+			<br />
+			<br />
+			<p:link href="index.jsf">Inicio</p:link>
+			<br />
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<p:panel header="Lista de alunos">
+				<h:form>
+					<p:growl id="msg" autoUpdate="true" showDetail="true" />
+					<p:dataTable value="#{alunoBean.alunos}" var="a" rows="7"
+						paginator="true">
+						<p:column headerText="Nome">
+							<h:outputText value="#{a.nome}" />
+						</p:column>
+						<p:column headerText="Matricula">
+							<h:outputText value="#{a.matricula}" />
+						</p:column>
+						<p:column headerText="Email">
+							<h:outputText value="#{a.email}" />
+
+						</p:column>
+						<p:column headerText="Ações">
+							<p:commandButton action="#{alunoBean.carregar(a)}" value="Editar"
+								ajax="false" />
+							<p:commandButton actionListener="#{alunoBean.remover(a)}"
+								value="Remover" ajax="false" />
+
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+</html>

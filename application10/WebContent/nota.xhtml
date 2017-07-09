@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Site</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" header="">
+			<center>
+				<h1>Notas dos alunos</h1>
+			</center>
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200" header="Menu"
+			resizable="true" closable="true" collapsible="true">
+			<p:link href="index.jsf">Inicio</p:link>
+			<br />
+			<br />
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<p:panel header="Dar nota ao aluno">
+				<h:form>
+					<p:growl id="msg" autoUpdate="true" showDetail="true" />
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Aluno - Disiciplina- Período:"></p:outputLabel>
+						<p:selectOneMenu value="#{matriculaBean.matricula}">
+							<f:converter converterId="matriculaConverter"></f:converter>
+							<f:validator validatorId="notaValidator" />
+							<f:selectItems value="#{matriculaBean.matriculas}" var="m"
+								itemLabel="#{m.aluno.nome} - #{m.disciplina.nome} - #{m.periodo}">
+							</f:selectItems>
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Nota:"></p:outputLabel>
+
+						<p:inputNumber value="#{matriculaBean.matricula.nota}">
+						</p:inputNumber>
+						<br />
+						<br />
+
+						<p:commandButton actionListener="#{matriculaBean.update}"
+							ajax="false" update="msg" value="Salvar" />
+					</h:panelGrid>
+					<br />
+					<br />
+				</h:form>
+				<p:dataTable value="#{matriculaBean.matriculas}" var="m" rows="7"
+					paginator="true">
+					<p:column headerText="Nome do aluno">
+						<h:outputText value="#{m.aluno.nome}" />
+					</p:column>
+					<p:column headerText="Disciplina">
+						<h:outputText value="#{m.disciplina.nome}" />
+					</p:column>
+					<p:column headerText="Período">
+						<h:outputText value="#{m.disciplina.periodo}" />
+					</p:column>
+					<p:column headerText="Nota">
+						<h:outputText value="#{m.nota}" />
+					</p:column>
+				</p:dataTable>
+
+
+
+			</p:panel>
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+</html>
