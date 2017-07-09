@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Sem Titulo</title>
+</head>
+<body>
+
+	<h:messages></h:messages>
+	<h:link value="Voltar" outcome="/index"></h:link>
+	<br />
+	<br />
+	<h:form>
+
+		<br />
+				Aluno:<br />
+		<h:selectOneMenu value="#{matriculaBean.matricula.aluno}">
+			<f:converter converterId="alunoConverter" />
+			<f:selectItems value="#{alunoBean.alunos}" var="a"
+				itemLabel="#{a.nome}" itemValue="#{a}">
+			</f:selectItems>
+		</h:selectOneMenu>
+		<br />
+		<br />
+		Disciplina:<br />
+		<h:selectOneMenu value="#{matriculaBean.matricula.disciplina}">
+			<f:converter converterId="disciplinaConverter" />
+			<f:selectItems value="#{disciplinaBean.disciplinas}" var="d"
+				itemLabel="#{d.nome}" itemValue="#{d}">
+			</f:selectItems>
+		</h:selectOneMenu>
+		<br />
+		<br></br>
+		<!-- Periodo:<br />
+		<h:selectOneMenu value="#{matriculaBean.matricula}">
+			<f:converter converterId="matriculaConverter" />
+			<f:selectItems value="#{matriculaBean.matriculas}" var="m"
+				itemLabel="#{m.periodo}" itemValue="#{m}">
+			</f:selectItems>
+		</h:selectOneMenu>
+		<br /> <br></br> -->
+
+		<h:selectOneMenu value="#{matriculaBean.matricula.periodo}">
+			<f:selectItem itemValue="2015.1" itemLabel="2015.1" />
+			<f:selectItem itemValue="2015.2" itemLabel="2015.2" />
+			<f:selectItem itemValue="2016.1" itemLabel="2016.1" />
+			<f:selectItem itemValue="2016.2" itemLabel="2016.2" />
+			<f:selectItem itemValue="2017.1" itemLabel="2017.1" />
+			<f:selectItem itemValue="2017.2" itemLabel="2017.2" />
+
+		</h:selectOneMenu> 
+		
+			Nota: <h:inputText value="#{matriculaBean.matricula.nota}">
+
+		</h:inputText>
+
+
+
+
+		<h:commandButton action="#{matriculaBean.update}" value="Salvar"></h:commandButton>
+
+	</h:form>
+</body>
+</html>

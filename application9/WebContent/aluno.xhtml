@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Application 7</title>
+</h:head>
+<h:body>
+	<h:link value="Voltar" outcome="/index"></h:link>
+	<br />
+	<br />
+	<h:messages showSummary="false" showDetail="true" />
+	<h:form>
+		<h:outputText value="Id: #{alunoBean.aluno.id}"
+			rendered="#{alunoBean.aluno.id > 0}"></h:outputText>
+		<br />
+		<h:inputHidden value="#{alunoBean.aluno.id}"></h:inputHidden>
+		Nome: <h:inputText value="#{alunoBean.aluno.nome}"></h:inputText>
+		<br />
+		Matricula: <h:inputText value="#{alunoBean.aluno.matricula}"></h:inputText>
+		<br />
+		<br />
+		Email: <h:inputText value="#{alunoBean.aluno.email}">
+			<f:validator validatorId="emailValidator"></f:validator>
+		</h:inputText>
+		<br />
+		<br />
+		<h:commandButton action="#{alunoBean.salvar()}" value="Salvar"></h:commandButton>
+	</h:form>
+	<br />
+	<br />
+
+	<h:dataTable value="#{alunoBean.alunos}" var="a" border="1">
+		<h:column>
+			<f:facet name="header">
+				Id
+			</f:facet>
+			<h:outputText value="#{a.id}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				Nome
+			</f:facet>
+			<h:outputText value="#{a.nome}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				Matricula
+			</f:facet>
+			<h:outputText value="#{a.matricula}"></h:outputText>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				Email
+			</f:facet>
+			<h:outputText value="#{a.email}"></h:outputText>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				Acoes
+			</f:facet>
+			<h:form>
+				<h:commandButton value="Editar" action="#{alunoBean.carregar(a)}"></h:commandButton>
+				<h:commandButton value="Remover" action="#{alunoBean.remover(a)}"></h:commandButton>
+			</h:form>
+		</h:column>
+	</h:dataTable>
+</h:body>
+</html>

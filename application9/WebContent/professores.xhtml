@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Application 8</title>
+</h:head>
+<h:body>
+	<h:link value="Voltar" outcome="/index"></h:link>
+	<br />
+	<br />
+
+	<h:dataTable value="#{professorBean.professores}" var="p" border="1">
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{p.id}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{p.nome}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header"> Disciplinas</f:facet>
+			<h:outputText value="#{p.disciplinas}"></h:outputText>
+		</h:column>
+
+	</h:dataTable>
+
+</h:body>
+</html>
